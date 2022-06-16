@@ -1,0 +1,30 @@
+# FUNÇÃO: Subir um pod que irá conter um aplicativo
+
+# CRIAR: "sem usar arquivo de definição"
+# kubectl run nginx --image nginx
+
+# CRIAR:
+# kubectl create -f pod-definition.yaml
+# ou
+# kubectl apply -f pod-definition.yaml
+
+# LISTAR:
+# kubectl get pods
+
+# DESCREVER / DETALHAR:
+# kubectl describe pod myapp-pod
+
+# DELETE:
+# kubectl delete pod myapp-pod
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: nginx
+    type: front-end
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx

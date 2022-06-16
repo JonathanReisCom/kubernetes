@@ -1,0 +1,35 @@
+# FUNÇÃO: Monitorar os pods, se algum falhar: criar novamente
+# OBS.: É melhor usar o replica-set por ser mais atualizado
+
+# CRIAR:
+# kubectl create -f replication-controller-definition.yaml
+
+# LISTAR:
+# kubectl get replicationcontroller
+
+# REPLACE: "usado para atualizar um que tenha sido criado"
+# kubectl replace -f replication-controller-definition.yaml
+# ou
+# kubectl scale --replicas=6 -f replication-controller-definition.yaml
+# ou
+# kubectl scale --replicas=6 -f replication-controller-definition.yaml
+
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: myapp-replicationrcontroller
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: nginx
+        type: front-end
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx
+  replicas: 3
