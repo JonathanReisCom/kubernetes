@@ -1,0 +1,43 @@
+# FUNÇÃO: Fornecer atualização declarativa para pods e ReplicaSets
+# OBS.: O deployment já cria um replicaset, que vai criar os pods
+
+# CRIAR:
+# kubectl create -f deployment-definition.yaml
+
+# LISTAR:
+# kubectl get deployments
+
+# LISTAR TUDO:
+# kubectl get all
+
+# EDITAR:
+# kubectl edit deployment myapp-deployment
+
+# DELETE: "também deleta os pods e o replicaset"
+# kubectl delete deployments myapp-deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp
+    # tier: front-end
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myapp
+      # tier: front-end
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: nginx
+        # tier: front-end
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx
+        poets:
+        - containerPort: 80

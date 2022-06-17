@@ -1,4 +1,4 @@
-# FUNçÃO: Monitorar os pods, se algum falhar: criar novamente
+# FUNÇÃO: Monitorar os pods, se algum falhar: criar novamente
 
 # CRIAR:
 # kubectl create -f replica-set-definition.yaml
@@ -13,6 +13,9 @@
 # ou
 # kubectl scale --replicas=6 replicaset myapp-replica-set
 
+# EDITAR:
+# kubectl edit replicaset myapp-replica-set
+
 # DELETE: "também deleta os pods"
 # kubectl delete replicaset myapp-replica-set
 
@@ -22,19 +25,19 @@ metadata:
   name: myapp-replica-set
   labels:
     app: myapp
-    type: front-end
+    tier: front-end
 spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: front-end
   template:
     metadata:
       name: myapp-pod
       labels:
         app: nginx
-        type: front-end
+        tier: front-end
     spec:
       containers:
       - name: nginx-container
         image: nginx
-  replicas: 3
-  selector:
-    matchLabels:
-      type: front-end
