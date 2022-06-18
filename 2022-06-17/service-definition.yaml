@@ -1,0 +1,32 @@
+# FUNÇÃO: Fornecer atualização declarativa para pods e ReplicaSets
+# OBS.: O service já cria um replicaset, que vai criar os pods
+
+# CRIAR:
+# kubectl create -f service-definition.yaml
+
+# LISTAR:
+# kubectl get services
+
+# LISTAR TUDO:
+# kubectl get all
+
+# EDITAR:
+# kubectl edit service myapp-service
+
+# DELETE: "também deleta os pods e o replicaset"
+# kubectl delete services myapp-service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-service
+  labels:
+    app: myapp-service
+spec:
+  type: ClusterIP
+  ports:
+  - targetPort: 80 # Porta em que o pod está exposto
+    port: 80
+  selector: # Se refere ao Pod
+    app: myapp
+    type: back-end
