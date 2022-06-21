@@ -1,0 +1,21 @@
+# FUNÇÃO: Criar espaços de trabalho para agrupar os serviços
+
+# CRIAR com arquivo
+# kubectl create -f namespace-definition.yaml
+
+# CRIAR sem arquivo
+# kubectl create namespace dev
+
+# LISTAR:
+# kubectl get namespaces
+
+# EDITAR:
+# kubectl edit namespace dev
+
+# DELETE: "também deleta os pods e o replicaset"
+# kubectl delete namespaces dev
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
