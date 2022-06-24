@@ -1,4 +1,4 @@
-# FUNÇÃO: Criar cotas computcionais para o namespace
+# FUNÇÃO: Criar cotas computacionais para o namespace
 
 # CRIAR com arquivo
 # kubectl create -f compute-quota-definition.yaml
