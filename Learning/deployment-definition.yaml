@@ -1,6 +1,21 @@
 # FUNÇÃO: Fornecer atualização declarativa para pods e ReplicaSets
 # OBS.: O deployment já cria um replicaset, que vai criar os pods
 
+# Create a deployment
+# kubectl create deployment --image=nginx nginx
+
+# Generate Deployment YAML file (-o yaml). Don't create it (--dry-run)
+# kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+# Generate Deployment with 4 Replicas
+# kubectl create deployment nginx --image=nginx --replicas=4
+
+# You can also scale a deployment using the kubectl scale command.
+# kubectl scale deployment nginx --replicas=4
+
+# Another way to do this is to save the YAML definition to a file and modify
+# kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml
+
 # CRIAR:
 # kubectl create -f deployment-definition.yaml
 
