@@ -1,0 +1,10 @@
+# FUNÇÃO: ligar um pod em um node
+
+apiVersion: v1
+kind: Binding
+metadata:
+  name: myapp-pod
+target:
+  apiVersion: v1
+  kind: Node
+  name: my-node
