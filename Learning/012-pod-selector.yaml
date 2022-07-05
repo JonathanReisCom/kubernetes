@@ -1,0 +1,19 @@
+# FUNÇÃO: Criar uma forma de agrupamento para os objetos
+
+# Buscar todos os pods com o seletor app = App1
+# kubectl get pods --selector app=App1
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app: App1 # Label 1
+    function: front-end # Label 2
+    # ... Posso colocar quantos quiser
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    poets:
+      - containerPort: 80

@@ -1,0 +1,38 @@
+# FUNÇÃO: Criar uma forma de agrupamento para os objetos
+
+# Buscar todos os pods com o seletor app = App1
+# kubectl get pods --selector app=App1
+
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replica-set
+  # START: Essa parte faz referencia ao ReplicaSet
+  labels:
+    app: App1
+    function: Front-end
+  # END
+  # START: Aqui posso especificar anotações gerais
+  annotations:
+    buildversion: 1.34
+  # END
+spec:
+  replicas: 3
+  selector:
+    # START: Essa parte está ligando o ReplicaSet aos Pods
+    # se achar que pode dar conflito, especifique mais de um para garantir
+    matchLabels:
+      app: App1
+    # END
+  template:
+    # START: Essa parte faz referencia aos pods
+    metadata:
+      name: myapp-pod
+      labels:
+        app: App1
+        function: Front-end
+    # END
+    spec:
+      containers:
+      - name: nginx-container
+        image: nginx

@@ -1,5 +1,8 @@
 # FUNÇÃO: ligar um pod em um node
 
+# CRIAR: Deve-se usar o formato JSON via API POST:
+# curl --header "Content-Type:application/json" --request POST --data {}
+
 apiVersion: v1
 kind: Binding
 metadata:
