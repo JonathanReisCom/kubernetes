@@ -1,0 +1,40 @@
+# FUNÇÃO: Direcionar um pod a um determinado tipo de node
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+  
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      # preferredDuringSchedulingIgnoredDuringExecution:
+      # requiredDuringSchedulingRequiredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: size
+            operator: In # NotIn, Exists
+            values:
+            - Large
+            - Medium
+
+Ciclos de vida de um pod
+
+  Available:
+  requiredDuringSchedulingIgnoredDuringExecution:
+  preferredDuringSchedulingIgnoredDuringExecution:
+
+  Planned:
+  requiredDuringSchedulingRequiredDuringExecution:
+
+required significa que é necessário existir o node com o par chave=valor especificado.
+preferred significa que caso não exista o node com o par chave=valor, ele pode ir para qualquer outro node disponível.
+ignored significa que caso tenha mudança, ele não vai sofrer alterações naquele momento.
+
+DuringScheduling é o momento em que o pode não existe e é criado pela primeira vez.
+DuringExecution é o momento em que o pode já existe e foi alterado.
+
