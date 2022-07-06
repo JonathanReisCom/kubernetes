@@ -1,0 +1,19 @@
+Taints e tolerations servem apenas para restringir os nodes de aceitar determinados pods.
+Isso não serve para permitir determinados pods a algum node, isso serve para restringir!
+
+Um taint é como se fosse uma marcação que pode ser aplicada em um "node", por exemplo:
+Marcar um node com uma informação que vai restringir alguma interação.
+
+Um toleration é como se fosse uma possibilidade de interagir com essa marcação "taint",
+e é aplicada ao pod.
+
+
+
+Descrição:
+kubectl taint nodes node-name key=value:taint-effect
+Onde "node-name" é o nome do node
+key=value -e o taint no modelo chave/valor
+taint-effect é o efeito aplicado, que pode ser (NoSchedule, PreferNoSchedule ou NoExecute)
+
+Exemplo:
+kubectl taint nodes node1 app=blue:NoSchedule

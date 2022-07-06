@@ -1,0 +1,18 @@
+# FUNÇÃO: Criar um pod com uma determinada toleration, não significa que ele vai direto para o nó que tem
+# determinado taint, ele pode ser "sorteado" para cair em qualquer outro que seja possivel
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+  tolerations:
+  - key: "app"
+    value: "blue"
+    operator: "Equal"
+    effect: "NoSchedule"
+    # Obs.: Todos essas valores devem estar entre aspas duplas
+  

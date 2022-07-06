@@ -15,5 +15,5 @@ spec:
   containers:
   - name: nginx-container
     image: nginx
-    poets:
+    ports:
       - containerPort: 80
