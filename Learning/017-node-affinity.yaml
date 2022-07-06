@@ -7,3 +7,6 @@ Ex.:
 # kubectl label nodes node01 size=Large
 
 Depois basta criar o pod com o nodeSelector com a definição correta.
+
+
+Além disso, posso usar Taints, tolerations e Node Affinity ao mesmo tempo!
