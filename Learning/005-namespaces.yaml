@@ -1,13 +1,13 @@
-# Namespaces servem para agrupar pods, serviçoes, deployments e etc.
+Namespaces servem para agrupar pods, serviçoes, deployments e etc.
 
-# CRIAR: "sem usar arquivo de definição"
+CRIAR: "sem usar arquivo de definição"
 # kubectl run nginx --image nginx --namespace=dev
 
-# CRIAR:
+CRIAR:
 # kubectl create -f pod-definition.yaml --namespace=dev
 
-# Definir um namespace definitivo:
+Definir um namespace definitivo:
 # kubectl config set-context $(kubectl config current-context) --namespace=dev
 
-# Buscar os pods em todos os Namespaces
+Buscar os pods em todos os Namespaces:
 # kubectl get pods --all-namespaces

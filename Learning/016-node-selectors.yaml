@@ -1,0 +1,9 @@
+Função: Direcionar o pod a algum grupo de node
+
+Para que o node selector funcione, primeiro deve-se definir labels para ele
+# kubectl label nodes <node-name> <label-key>=<label-value>
+
+Ex.:
+# kubectl label nodes node01 size=Large
+
+Depois basta criar o pod com o nodeSelector com a definição correta.

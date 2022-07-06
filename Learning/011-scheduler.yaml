@@ -1,5 +1,5 @@
 Um scheduler serve para ligar um pod a um node.
 Se o sistema não tiver um scheduler, quando criar um pod ele vai ficar com status "Pending"
-Para verificar se o shedule existe:
 
+Para verificar se o shedule existe:
 $ kubectl get pods -n kube-system
