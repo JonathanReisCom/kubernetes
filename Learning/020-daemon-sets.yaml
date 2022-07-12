@@ -1,3 +1,30 @@
 Função: Criar uma forma de manter um pod em todos os nodes, é bom para criar ferramentas de
-monitoramento.
+monitoramento e de logs.
+Quando um node é adicionado, ele vai colocar o pod lá, quando o node é removido, o pod é removido também.
 
+Exemplos:
+- Kube Proxy
+- Weave Net
+
+# CRIAR:
+# kubectl create -f daemon-set-definition.yaml
+
+# ---
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: monitoring-daemon
+spec:
+  selector:
+    matchLabels:
+      name: monitoring-agent
+  template:
+    metadata:
+      labels:
+        app: monitoring-agent
+    spec:
+      containers:
+      - name: monitoring-agent
+        image: monitoring-agent
+        
