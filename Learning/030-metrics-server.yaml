@@ -1,0 +1,27 @@
+Função: Monitorar o uso de recursos no cluster, como memória e cpu
+
+O kubernetes por padrão não vem com nenhum sistema de monitoramento, então recomenda-se instalar o Metrics-Server.
+Ele não irá armazenar os dados em algum banco de dados, ele exibirá apenas o momento atual do cluster.
+Para armazenar um histórico, deve-se utilizar algo a parte, como o Prometheus.
+
+Outros exemplos:
+- Elastic Stack
+- Datadog
+- Dynatrace
+- Prometheus
+
+Deploy do Metrics-Server:
+Obs.: Não use isso em ambiente de produção, ele é apenas para estudos
+# git clone https://github.com/kodekloudhub/kubernetes-metrics-server.git
+# cd kubernetes-metrics-server
+# kubectl create -f .
+
+Verificar métricas de desempenho dos nodes:
+# kubectl top node
+
+Verificar métricas de desempenho dos pods:
+# kubectl top pods
+
+
+Ficar verificando mudança de status dos pods:
+# kubectl get pods -A --watch

@@ -1,0 +1,35 @@
+Função: Simular logs gerados por alguma aplicação
+
+Rodar o container simulador de logs em backgroud:
+# docker run -d kodekloud/event-simulator
+
+Verificar os logs:
+# docker logs -f [ID CO CONTAINER]
+
+Agora trazendo isso para os PODs Kubernetes:
+
+--- event-simulator.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: event-simulator
+spec:
+  containers:
+  - name: event-simulator-01
+    image: kodekloud/event-simulator
+
+  - name: event-simulator-02
+    image: kodekloud/event-simulator
+---
+
+Criar o pod:
+# kubectl create -f event-simulator.yaml
+ou
+# kubectl apply -f event-simulator.yaml
+
+Monitor os logs desse pod para o conteier 01:
+# kubectl logs -f event-simulator event-simulator-01
+
+Monitor os logs desse pod para o conteier 02:
+# kubectl logs -f event-simulator event-simulator-02
+
