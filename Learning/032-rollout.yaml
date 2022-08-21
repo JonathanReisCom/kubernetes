@@ -1,0 +1,26 @@
+Função: Atualizar uma versão de um deployment
+Ele vai criar um novo ReplicaSet para controlar a atualização
+
+Estratégias de update:
+- Recreate: Vai destruir todos os pods e então recriar os novos.
+- Rolling Update (default): Vai destruir apenas 1 e subir um novo no lugar, fazendo isso para todos os pods um após o outro.
+
+Se você não especificar a estratégia, ele vai usar a "Rolling Update"
+
+
+Criar:
+# kubectl create -f deployment-definition.yaml
+ou
+# kubectl apply -f deployment-definition.yaml
+
+Executar a mudança:
+# kubectl apply -f deployment-definition.yaml
+
+Ver o status:
+# kubectl rollout status deployment/myapp-deployment
+
+Ver o histórico:
+# kubectl rollout history deployment/myapp-deployment
+
+Desfazer a mudança:
+# kubectl rollout undo deployment/myapp-deployment
