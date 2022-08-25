@@ -1,0 +1,17 @@
+drain:
+função: marcar um node como indisponível para receber pods, também vai drenar "tirar" os pods dele.
+command: k drain node-01
+obs.: O status desse node vai passar para Ready, SchedulingDisabled
+      Pode ser necessário passar algum argumento, ex. --ignore-daemonsets
+      Se mesmo assim não funcionar, pode ser que exista algum pod nesse node que não é gerenciado
+      por algum ReplicationController, ReplicaSet, Job, DaemonSet ou Statefulset, nesse caso,
+      pode usar a opção --force, mas há o risco de perder para sempre esse pod.
+
+uncordon:
+função: Habilitar novamente a possibilidade de receber pods nesse node.
+command: k uncordon node-01
+obs.: Os pods não voltarão para esse node automaticamente, vai precisar forçar isso.
+
+cordon:
+função: Para marcar um nó como não disponível / não agendável
+obs.: Ele não vai remover os pods, essa é a diferença dela para o "drain"

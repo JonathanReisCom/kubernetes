@@ -1,0 +1,72 @@
+- Pod + volume cache
+- Pod + capacities
+- Volumes
+- Backup ETCD Cluster
+- Upgrade deployment
+- Expor serviços
+
+
+- Create user with permissions
+- DNS resolution para pods
+
+
+
+# Visualizar um certificado:
+openssl x509 -in /etc/kubernetes/pki/ca.crt -text -noout
+
+
+# Garantir acesso a algum usuário:
+
+- Visualizar o certificado:
+$ cat john.csr
+
+- Criar um pedido de entrada de certificado:
+https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/#create-certificatesigningrequest
+
+$ vim john.csr.yaml
+-> "Colar o exemplo e salvar"
+
+- Obter o base64 do certificado fornecido:
+$ cat john.csr | base64 | tr -d "\n"
+-> "Copiar e colar no local correto do arquivo yaml: john.csr.yaml"
+
+- Podemos criar o CSR:
+$ k create -f john.csr.yaml
+-> Ele vai ficar em estado Pending, então precisamos aprovar
+
+$ k certificate approve john-developer
+$ k get csr
+-> "Agora ele deve estar como Approved"
+
+- Criar a regra com os privilégios:
+$ k create role developer --verb=create,get,list,update,delete --resource=pods -n development
+$ k describe role -n development
+
+- Verificar se o usuário consegue fazer alguma coisa:
+$ k auth can-i get pods --namespace=development as john
+-> Deve aparecer que não pode fazer
+
+- Vincular uma regra a um usuário:
+$ k create rolebinding john-developer --role=developer --user=john --namespace=development
+$ k get rolebinding -n development
+
+- Verificar novamente:
+$ k auth can-i get pods --namespace=development as john
+-> Agora deve aparecer que pode fazer
+
+
+-----------------------------------
+
+# Testr conectividade entre pods:
+- Criar um pod que tenha um nslookup:
+$ k run busybox --image=busybox:1.28 -- sleep 4000
+
+- Testar o service "nginx-resolver-service"
+$ k exec busybox -- nslookup nginx-resolver-service
+
+- Testar o pod "nginx"
+$ k get pods nginx -o wide
+-> pegar o IP "10.50.192.6"
+
+$ k exec busybox -- nslookup 10-50-192-6.default.pod.cluster.local
+

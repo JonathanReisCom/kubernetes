@@ -1,0 +1,31 @@
+command: kubeadm upgrade plan
+função: Vai mostrar os passos que precisam ser feitos para atualizar o kubernetes.
+        Mostrando também as versões atuais e as versões estaveis desejadas.
+obs.: É recomendado atualizar de 1 em um as minor versions.
+      v1.10.0 -> v1.11.0 -> v1.12.0
+
+Antes de atualizar o cluster, o kubeadm precisa ser atualizado também
+
+Atualizar o kubeadm:
+command: apt-get upgrade kubeadm=1.12.0-00
+
+Para atualizar o cluster:
+command: kubeadm upgrade apply v1.12.0
+
+Atualizar o kubelet:
+command: apt-get upgrade -y kubelet-1.12.0-00
+command: systemctl restart kubelet
+Verificar:
+command: kubectl get nodes
+
+
+
+Então a lógica a seuir para atualizar seria essa:
+no master: kubectl drain node-1
+no worker: apt-get upgrade -y kubeadm=1.12.0-00
+no worker: apt-get upgrade -y kubelet-1.12.0-00
+no worker: kubeadm upgrade node config --kubelet-version v1.12.0
+no worker: systemctl restart kubelet
+no master: kubectl uncordon node-1
+
+
