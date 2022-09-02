@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: webapp-wear
+  name: webapp-wear
+spec:
+  containers:
+  - image: kodekloud/ecommerce:apparels
+    imagePullPolicy: Always
+    name: webapp-wear
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+  restartPolicy: Always

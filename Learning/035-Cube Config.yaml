@@ -1,0 +1,66 @@
+# O kubeconfig serve para ajudar o kubectl a se conectar a algum cluster
+# e opcionalmente a algum namespace
+# Ele faz o uso de um arquivo de definição que irá conter:
+
+clusters: Os links e certificados dos clusters.
+users: Os uauários dos clusters.
+context: A ligação entre um usuário e um cluster.
+current-context: O contexto default para o kubectl usar.
+
+
+### Comandos:
+
+# Vai listar a configuração default em ~/.kube/config
+$ k config view
+
+# Vai listar a configuração especificada
+$ k config view --bubeconfig=my-custom-config-file
+
+# Mudar o contexto (Esse comando irá alterar o arquivo config)
+$ k config use-context admin@aws
+
+
+# Exemplo:
+
+apiVersion: v1
+
+current-context: ""
+kind: Config
+
+clusters:
+- cluster:
+    certificate-authority: /etc/kubernetes/pki/fake-ca-file.crt
+    server: https://1.2.3.4
+  name: aws
+- cluster:
+    certificate-authority-data: base64_com_varios_caracteres
+    server: https://5.6.7.8
+  name: google
+
+contexts:
+- context:
+    cluster: aws
+    user: admin
+  name: admin@aws
+- context:
+    cluster: google
+    user: developer
+    namespace: finance
+  name: developer@google
+
+users:
+- name: developer
+  user:
+    client-certificate-data: base64_com_varios_caracteres
+    client-key-data: base64_com_varios_caracteres
+- name: admin
+  user:
+    client-certificate: /etc/kubernetes/pki/users/admin-fake-file.crt
+    client-key: /etc/kubernetes/pki/users/admin-fake-file.key
+
+# Codificar um certificado em base64
+$ cat ca.crt | base64
+
+# Decodificar um base64 em certificado
+$ echo "base64_com_varios_caracteres" | base64 --decode
+

@@ -1,13 +1,15 @@
+# ESSE POD FICA GERANDO LOGS ALEATÓRIOS
 apiVersion: v1
 kind: Pod
 metadata:
-  name: webapp
+  name: event-simulator
   namespace: default
 spec:
   containers:
-  - env:
+  - name: event-simulator
+    image: kodekloud/event-simulator
+    imagePullPolicy: IfNotPresent
+    env:
     - name: LOG_HANDLERS
       value: file
-    image: kodekloud/event-simulator
-    imagePullPolicy: Always
-    name: event-simulator
+  restartPolicy: Always

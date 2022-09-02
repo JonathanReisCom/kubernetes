@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: webapp-payment
+  name: webapp-payment
+spec:
+  containers:
+  - image: kodekloud/ecommerce:pay
+    imagePullPolicy: Always
+    name: webapp-payment
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+  restartPolicy: Always

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: webapp-video
+  name: webapp-video
+spec:
+  containers:
+  - image: kodekloud/ecommerce:video
+    imagePullPolicy: Always
+    name: webapp-video
+    ports:
+    - containerPort: 8080
+      protocol: TCP
+  restartPolicy: Always
