@@ -1,0 +1,20 @@
+# Usando aws
+
+$ echo "aaa;bbb" | awk -F';' '{print $1}'
+# output is aaa
+
+$ echo "aaa;bbb" | awk -F';' '{print $2}'
+# output is bbb
+
+
+
+
+
+# Usando cut
+
+$ echo "aaa;bbb" | cut -d';' -f1
+# output is aaa
+
+$ echo "aaa;bbb" | cut -d';' -f2
+# output is bbb
+
